@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @comment.author %>
+</p>
+
+<p>
+  <strong>Comment entry:</strong>
+  <%= @comment.comment_entry %>
+</p>
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>
+
+
+<div class="panel-body">
+  by <strong><%= @blog_post.author %></strong> <span class="posted-at">posted at: <%= @blog_post.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span><br />
+
+    <p><%= @blog_post.blog_entry %></p>
+</div>
+</div>
+
+</div>
+<% @blog_post.comments.each do |comment| %>
+<div class="panel-body">
+  <p><strong><%= comment.author %></strong> said:</p>
+  <p><%= comment_entry %></p>
+  <p><span class ="posted-at"><%= comment.created_at.strftime ("%m/%d/%Y at %I:%M%p")%></span></p>
+</div>
+<% end %>
