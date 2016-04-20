@@ -9,20 +9,21 @@
         <%= link_to blog_post.title, blog_post %>
         </div>
         <div class="panel-body">
-          by <%= blog_post.author %><br />
-          <p><span class="posted-at"> posted at: <%= blog_post.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span></p>
+          by <%= link_to blog_post.user.username, user_posts_path(id: blog_post.user.id) %>
+          <span class="posted-at"> posted at: <%= blog_post.created_at.strftime("%m/%d/%Y at %I:%M%p") %></span></p>
           <p><%=truncate(blog_post.blog_entry, length: 250, separator: " ") %> <br /> [<%= link_to 'Read More', blog_post %>]</p>
 
             </div>
+            <% if current_user.id == blog_post.user.id %>
             <div class="panel-footer">
               <%= link_to "Show", blog_post, class: "btn btn-primary" %>
               <%= link_to "Edit", edit_blog_post_path(blog_post), class: "btn btn-warning" %>
               <%= link_to "Destroy", blog_post, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
               </div>
+              <% end %>
             </div>
+          </div>
+            <% end %>
       </div>
-      <% end %>
-      </div>
-
-
-<%= link_to "New Blog post", new_blog_post_path %>
+    <br>
+    <%= link_to 'New Blog Post', new_blog_post_path %>
